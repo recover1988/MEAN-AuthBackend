@@ -5,6 +5,7 @@ const {
 	revalidaToken,
 	loginUsuario,
 } = require("../controllers/auth");
+const { validarCampos } = require("../middlewares/validar-campos");
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.post(
 		check("name", "El nombre minimo de 6").isLength({ min: 6 }),
 		check("email", "El email es obligatorio").isEmail(),
 		check("password", "La contraseña es obligatoria").isLength({ min: 6 }),
+		validarCampos,
 	],
 	crearUsuario
 );
@@ -25,6 +27,7 @@ router.post(
 	[
 		check("email", "El email es obligatorio").isEmail(),
 		check("password", "La contraseña es obligatorio").isLength({ min: 6 }),
+		validarCampos,
 	],
 	loginUsuario
 );
