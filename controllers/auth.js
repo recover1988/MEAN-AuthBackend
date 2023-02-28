@@ -1,6 +1,7 @@
 const { response, request } = require("express");
 
 const crearUsuario = (req = request, res = response) => {
+	console.log(req.body);
 	return res.json({
 		ok: true,
 		msg: "Crear usuario /new",
