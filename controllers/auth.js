@@ -83,10 +83,15 @@ const loginUsuario = async (req = request, res = response) => {
 	}
 };
 
-const revalidaToken = (req, res) => {
+const revalidaToken = async (req, res) => {
+	const { uid, name } = req;
+	// Generar el JWT -> metodo de autentificacion pasiva
+	const token = await generarJWT(uid, name);
 	return res.json({
 		ok: true,
-		msg: "Renew",
+		uid,
+		name,
+		token,
 	});
 };
 
