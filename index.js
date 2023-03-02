@@ -28,7 +28,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 
 // Manejar rutas
-app.length("*", (res, res) => {
+app.get("*", (req, res) => {
 	res.sendFile(path.resolve(__dirname, "public/index.html"));
 });
 
