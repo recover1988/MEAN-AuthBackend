@@ -31,6 +31,7 @@ const crearUsuario = async (req = request, res = response) => {
 			ok: true,
 			uid: dbUser.id,
 			name,
+			email,
 			token,
 		});
 	} catch (error) {
@@ -73,6 +74,7 @@ const loginUsuario = async (req = request, res = response) => {
 			uid: dbUser.id,
 			name: dbUser.name,
 			token,
+			email,
 		});
 	} catch (error) {
 		console.log(error);
@@ -85,13 +87,17 @@ const loginUsuario = async (req = request, res = response) => {
 
 const revalidaToken = async (req, res) => {
 	const { uid, name } = req;
+	// Obtener el usuario
+	const dbUser = await Usuario.findById(uid);
 	// Generar el JWT -> metodo de autentificacion pasiva
 	const token = await generarJWT(uid, name);
+	// Respuesta del servicio
 	return res.json({
 		ok: true,
 		uid,
 		name,
 		token,
+		email: dbUser.email,
 	});
 };
 
